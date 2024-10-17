@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "53451079021",
+    "project_id": "restaurante-571de",
+    "storage_bucket": "restaurante-571de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53451079021:android:865929a5871bbfd10f6e64",
+        "android_client_info": {
+          "package_name": "com.example.finance_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnwpEZB24r_Ns0tX44cCe1HsMcKAZULqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
