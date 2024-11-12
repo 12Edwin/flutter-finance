@@ -1,4 +1,5 @@
 import 'package:finance_app/navigation/home.dart';
+import 'package:finance_app/navigation/map_sample.dart';
 import 'package:finance_app/navigation/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _NavigationState extends State<Navigation> {
   static const _widgetOptions =  [
     Home(),
     Profile(),
+    MapSample()
   ];
 
   @override
@@ -30,6 +32,10 @@ class _NavigationState extends State<Navigation> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Mapa',
           ),
         ],
         currentIndex: 0,

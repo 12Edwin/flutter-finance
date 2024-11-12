@@ -4,7 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 
+import 'kernel/widget/utils/locator.dart';
 import 'modules/auth/login.dart';
+import 'modules/auth/placeholder/screens/placeholder_dio.dart';
 import 'modules/auth/recovery.dart';
 import 'modules/auth/register.dart';
 import 'modules/auth/send_code.dart';
@@ -12,6 +14,7 @@ import 'modules/auth/validate_code.dart';
 import 'navigation/navigation.dart';
 
 void main () async {
+  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   runApp(const MyApp());
@@ -25,15 +28,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/register',
+      initialRoute: '/post',
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/': (context) => const PlaceholderDio(),
         '/menu': (context) => const Navigation(),
         '/login': (context) => const Login(),
         '/register': (context) => const Register(),
         '/sendCode': (context) => const SendCode(),
         '/validateCode': (context) => const ValidateCode(),
         '/recovery': (context) => const Recovery(),
+        '/post': (context) => const PlaceholderDio(),
       }
     );
   }

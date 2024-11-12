@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,20 +16,35 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     FirebaseAuth.instance
     .authStateChanges()
-    .listen((User? user) async {
-      if (user != null) {
-        Navigator.pushNamed(context, '/menu');
-      }else{
-        Navigator.pushNamed(context, '/login');
-      }
+    .listen((User? user) {
+      Future.delayed(const Duration(seconds: 2), (){
+        if (user != null) {
+          Navigator.pushNamed(context, '/menu');
+        }else{
+          Navigator.pushNamed(context, '/login');
+        }
+      });
     });
-
-    // Future.delayed(const Duration(seconds: 3), (){
-    //   Navigator.pushReplacementNamed(context, '/login');
-    // });
   }
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CupertinoActivityIndicator(),
+              SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: Text('Bienvenido', textAlign: TextAlign.center, style: TextStyle(fontSize: 24)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

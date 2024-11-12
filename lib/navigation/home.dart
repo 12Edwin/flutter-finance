@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finance_app/entities/User.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'Detail.dart';
 import 'UserRow.dart';
 
 class Home extends StatefulWidget {
@@ -25,7 +27,7 @@ class _HomeState extends State<Home> {
       .listen((event) {
         data = [];
         for (var doc in event.docs) {
-          data.add(doc.data() as User);
+          data.add(User.fromMap(doc.data()));
         }
         if (mounted){
           setState(() {
@@ -50,7 +52,14 @@ class _HomeState extends State<Home> {
         padding: const EdgeInsets.all(8),
         itemCount: data.length,
         itemBuilder: (BuildContext context, int index) {
-          return UserRow(user: data[index]);
+          return GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return Detail(user: data[index]);
+              }));
+            },
+            child: UserRow(user: data[index])
+          );
         }
       ),
     );

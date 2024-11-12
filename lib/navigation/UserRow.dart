@@ -1,6 +1,7 @@
 import 'package:finance_app/navigation/Detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../entities/User.dart';
 
@@ -14,12 +15,12 @@ class UserRow extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context){
-        return Detail(user: user,);
+        return Detail(user: user);
     }));
       },
       child: Row(
         children: [
-          Image.network(user.images[0], width: 150, height: 150),
+          Image.network(user.images[0], width: 100),
           const SizedBox(width: 8),
           Column(
             children: [
@@ -30,8 +31,8 @@ class UserRow extends StatelessWidget {
           ),
           const Spacer(),
           StarRating(
-            rating: user.ratting.toDouble(),
-            starCount: 0,
+            rating: user.ratting,
+            starCount: 5,
           ),
         ],
       ),
