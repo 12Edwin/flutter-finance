@@ -2,9 +2,11 @@ import 'package:finance_app/navigation/home.dart';
 import 'package:finance_app/navigation/map_sample.dart';
 import 'package:finance_app/navigation/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation({super.key});
+  final bool nextButton;
+  const Navigation({super.key, required this.nextButton});
 
   @override
   State<Navigation> createState() => _NavigationState();
@@ -13,6 +15,22 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
 
   int selectedIndex = 0;
+  late final SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    (() async {
+      if (!widget.nextButton) {
+        prefs = await SharedPreferences.getInstance();
+        bool? isTutorialDone = prefs.getBool('isTutorialDone');
+        if (isTutorialDone == null) {
+          Navigator.pushReplacementNamed(context, '/tutorial');
+        }
+      }
+    })();
+  }
+
   static const _widgetOptions =  [
     Home(),
     Profile(),

@@ -1,6 +1,7 @@
 import 'package:finance_app/widget/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 
@@ -11,12 +12,13 @@ import 'modules/auth/recovery.dart';
 import 'modules/auth/register.dart';
 import 'modules/auth/send_code.dart';
 import 'modules/auth/validate_code.dart';
+import 'modules/tutorial/tutorial.dart';
 import 'navigation/navigation.dart';
 
 void main () async {
   setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,16 +30,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/post',
       routes: {
-        '/': (context) => const PlaceholderDio(),
-        '/menu': (context) => const Navigation(),
+        '/': (context) => const SplashScreen(),
+        '/menu': (context) => const Navigation(nextButton: false,),
         '/login': (context) => const Login(),
         '/register': (context) => const Register(),
         '/sendCode': (context) => const SendCode(),
         '/validateCode': (context) => const ValidateCode(),
         '/recovery': (context) => const Recovery(),
         '/post': (context) => const PlaceholderDio(),
+        '/tutorial': (context) => const Tutorial(),
       }
     );
   }
